@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Pages;
 
-use Filament\Pages\Page;
+use Modules\Xot\Filament\Pages\XotBaseDashboard;
 
-class Dashboard extends Page
+class Dashboard extends XotBaseDashboard
 {
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-home';
 
     protected string $view = 'rating::filament.pages.dashboard';
 } 
