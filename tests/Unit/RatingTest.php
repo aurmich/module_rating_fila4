@@ -5,29 +5,77 @@ namespace Modules\Rating\Tests\Unit;
 use Modules\Rating\Tests\TestCase;
 use Modules\Rating\Models\Rating;
 use Modules\Rating\Models\RatingMorph;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+use Illuminate\Foundation\Testing\RefreshDatabase;
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 use Modules\Rating\Enums\SupportedLocale;
 use Modules\Rating\Enums\RuleEnum;
 
 class RatingTest extends TestCase
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    use RefreshDatabase;
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 
     public function test_can_create_rating(): void
     {
         $rating = Rating::create([
+<<<<<<< HEAD
             'name' => 'Test Rating',
             'color' => '#FF0000',
+=======
+<<<<<<< HEAD
+            'name' => 'Test Rating',
+            'color' => '#FF0000',
+=======
+            'title' => 'Test Rating',
+            'value' => 5,
+            'color' => '#FF0000',
+            'icon' => 'star',
+            'rule' => RuleEnum::ARTICLE->value,
+            'txt' => 'Test description',
+            'is_disabled' => false,
+            'is_readonly' => false,
+            'extra_attributes' => ['type' => 'test']
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
         ]);
 
         $this->assertDatabaseHas('ratings', [
             'id' => $rating->id,
+<<<<<<< HEAD
             'name' => 'Test Rating'
+=======
+<<<<<<< HEAD
+            'name' => 'Test Rating'
+=======
+            'title' => 'Test Rating'
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
         ]);
     }
 
     public function test_can_create_rating_morph(): void
     {
         $rating = Rating::create([
+<<<<<<< HEAD
             'name' => 'Test Rating',
+=======
+<<<<<<< HEAD
+            'name' => 'Test Rating',
+=======
+            'title' => 'Test Rating',
+            'value' => 5
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
         ]);
 
         $ratingMorph = RatingMorph::create([

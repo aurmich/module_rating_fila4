@@ -4,15 +4,31 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models\Traits;
 
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Collection;
 use Modules\Xot\Contracts\UserContract;
+=======
+<<<<<<< HEAD
+use Illuminate\Database\Eloquent\Collection;
+use Modules\Xot\Contracts\UserContract;
+=======
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Rating\Models\Like;
 
 trait HasLikes
 {
     /**
+<<<<<<< HEAD
      * @return Collection
+=======
+<<<<<<< HEAD
+     * @return Collection
+=======
+     * @return \Illuminate\Database\Eloquent\Collection
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function likes()
     {
@@ -22,7 +38,15 @@ trait HasLikes
     /**
      * param \Modules\Xot\Contracts\UserContract|null $user.
      *
+<<<<<<< HEAD
      * @param UserContract|null $user
+=======
+<<<<<<< HEAD
+     * @param UserContract|null $user
+=======
+     * @param \Modules\Xot\Contracts\UserContract|null $user
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function likedBy($user): void
     {
@@ -34,7 +58,15 @@ trait HasLikes
     /**
      * param \Modules\Xot\Contracts\UserContract|null $user.
      *
+<<<<<<< HEAD
      * @param UserContract|null $user
+=======
+<<<<<<< HEAD
+     * @param UserContract|null $user
+=======
+     * @param \Modules\Xot\Contracts\UserContract|null $user
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function dislikedBy($user): void
     {
@@ -42,7 +74,15 @@ trait HasLikes
          * @var Like
          */
         $where = $this->likesRelation()->where('user_id', $user->id)->first();
+<<<<<<< HEAD
         if ($where !== null) {
+=======
+<<<<<<< HEAD
+        if ($where !== null) {
+=======
+        if (null !== $where) {
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
             $where->delete();
         }
 
@@ -63,7 +103,16 @@ trait HasLikes
     /**
      * param \Modules\Xot\Contracts\UserContract|null $user.
      *
+<<<<<<< HEAD
      * @param UserContract|null $user
+=======
+<<<<<<< HEAD
+     * @param UserContract|null $user
+=======
+     * @param \Modules\Xot\Contracts\UserContract|null $user
+     *
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      * @return bool
      */
     public function isLikedBy($user)
@@ -79,7 +128,16 @@ trait HasLikes
     protected static function bootHasLikes()
     {
         static::deleting(function ($model): void {
+<<<<<<< HEAD
             $model->likesRelation()->delete(); /** @phpstan-ignore method.nonObject */
+=======
+<<<<<<< HEAD
+            $model->likesRelation()->delete(); /** @phpstan-ignore method.nonObject */
+=======
+            $model->likesRelation()->delete();
+
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
             $model->unsetRelation('likesRelation');
         });
     }

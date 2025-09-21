@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models\Traits;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> d06edcd (.)
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use ReflectionException;
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 use Illuminate\Database\Eloquent\Builder;
 // //use Laravel\Scout\Searchable;
 
@@ -26,7 +35,15 @@ use Modules\Rating\Models\Rating;
 trait RatingTrait
 {
     /**
+<<<<<<< HEAD
      * @return MorphToMany
+=======
+<<<<<<< HEAD
+     * @return MorphToMany
+=======
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function ratings()
     {
@@ -34,7 +51,15 @@ trait RatingTrait
     }
 
     /**
+<<<<<<< HEAD
      * @return HasMany
+=======
+<<<<<<< HEAD
+     * @return HasMany
+=======
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function ratingObjectives()
     {
@@ -74,7 +99,15 @@ trait RatingTrait
     }
 
     /**
+<<<<<<< HEAD
      * @return MorphToMany
+=======
+<<<<<<< HEAD
+     * @return MorphToMany
+=======
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function myRatings()
     {
@@ -84,10 +117,24 @@ trait RatingTrait
 
     // ----- mutators -----
     // *
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> d06edcd (.)
     /**
      * @param float $value
      *
      * @return Collection
+<<<<<<< HEAD
+=======
+=======
+
+    /**
+     * @param float $value
+     *
+     * @return \Illuminate\Support\Collection
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function getMyRatingAttribute($value)
     {
@@ -135,8 +182,18 @@ trait RatingTrait
     */
     // ------ functions ------
     /**
+<<<<<<< HEAD
      * @throws FileNotFoundException
      * @throws ReflectionException
+=======
+<<<<<<< HEAD
+     * @throws FileNotFoundException
+     * @throws ReflectionException
+=======
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws \ReflectionException
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
      */
     public function ratingAvgHtml(): string
     {

@@ -4,8 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models;
 
+<<<<<<< HEAD
 use Modules\Xot\Actions\Factory\GetFactoryAction;
 use Illuminate\Database\Eloquent\Factories\Factory;
+=======
+<<<<<<< HEAD
+use Modules\Xot\Actions\Factory\GetFactoryAction;
+use Illuminate\Database\Eloquent\Factories\Factory;
+=======
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 use Modules\Xot\Traits\Updater;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -69,10 +77,24 @@ abstract class BaseModel extends Model
      /**
      * Create a new factory instance for the model.
      *
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> d06edcd (.)
      * @return Factory<static>
      */
     protected static function newFactory()
     {
         return app(GetFactoryAction::class)->execute(static::class);
+<<<<<<< HEAD
+=======
+=======
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
+     */
+    protected static function newFactory()
+    {
+        return app(\Modules\Xot\Actions\Factory\GetFactoryAction::class)->execute(static::class);
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
     }
 }

@@ -2,7 +2,14 @@
 
 declare(strict_types=1);
 
+<<<<<<< HEAD
 use Modules\Xot\Datas\XotData;
+=======
+<<<<<<< HEAD
+use Modules\Xot\Datas\XotData;
+=======
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 use Illuminate\Database\Schema\Blueprint;
 // ----- models -----
 
@@ -26,7 +33,15 @@ return new class extends XotBaseMigration
                 $table->id();
                 $table->foreignIdFor(Rating::class, 'rating_id')->nullable();
                 $table->nullableMorphs('model');
+<<<<<<< HEAD
                 $table->foreignIdFor(XotData::make()->getUserClass(), 'user_id')->nullable();
+=======
+<<<<<<< HEAD
+                $table->foreignIdFor(XotData::make()->getUserClass(), 'user_id')->nullable();
+=======
+                $table->foreignIdFor(Modules\Xot\Datas\XotData::make()->getUserClass(), 'user_id')->nullable();
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
                 $table->decimal('value', 10, 3)->nullable();
                 $table->text('note')->nullable();
             }
@@ -60,7 +75,15 @@ return new class extends XotBaseMigration
                 } else {
                     $table->decimal('value', 10, 3)->nullable();
                 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+               
+>>>>>>> origin/develop
+>>>>>>> d06edcd (.)
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }
