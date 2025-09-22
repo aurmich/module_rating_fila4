@@ -79,6 +79,34 @@ class Article extends Model
 }
 ```
 
+#### PHPStan Compatibility
+Il trait è stato ottimizzato per PHPStan livello 10:
+
+```php
+/**
+ * Relazione morphToMany con il modello Rating
+ *
+ * @return MorphToMany<Rating, \Illuminate\Database\Eloquent\Model, RatingMorph, 'pivot'>
+ */
+public function ratings(): MorphToMany
+{
+    // ... implementazione ...
+    
+    /** @var MorphToMany<Rating, \Illuminate\Database\Eloquent\Model, RatingMorph, 'pivot'> $relation */
+    $relation = $this->morphToMany(Rating::class, 'model', $pivot_table_full)
+        ->using($pivot_class)
+        ->withPivot($pivot_fields)
+        ->withTimestamps();
+
+    return $relation;
+}
+```
+
+**Note tecniche:**
+- Uso di `\Illuminate\Database\Eloquent\Model` invece di `$this` per evitare problemi di covarianza nei template generici
+- Tipizzazione esplicita della variabile `$relation` per garantire type safety
+- Compatibilità con PHPStan livello 10 senza soppressioni
+
 ### Rating Model Structure
 Il modello Rating utilizza il nuovo pattern `casts()` di Laravel 12:
 
