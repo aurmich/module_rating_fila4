@@ -20,17 +20,8 @@ use Modules\Rating\Models\RatingMorph;
  */
 trait HasRating
 {
-<<<<<<< HEAD
-    //  laravel/Modules/Xot/app/Models/Traits/RelationX.php  poi passare a morphToManyX per standardizzare
-    /**
-     * Relazione morphToMany con il modello Rating
-     *
-     * @return MorphToMany<Rating, \Illuminate\Database\Eloquent\Model, RatingMorph, 'pivot'>
-     */
-=======
 
     //  laravel/Modules/Xot/app/Models/Traits/RelationX.php  poi passare a morphToManyX per standardizzare
->>>>>>> d37c2e9 (.)
     public function ratings(): MorphToMany
     {
         $class = static::class;
@@ -41,23 +32,6 @@ trait HasRating
         $pivot_class = RatingMorph::class;
         $pivot = app($pivot_class);
         $pivot_table = $pivot->getTable();
-<<<<<<< HEAD
-
-        $pivot_table_full = $pivot_table;
-
-        $pivot_fields = array_filter($pivot->getFillable(), function ($field) {
-
-            return ! in_array($field, ['sum_credit_yes', 'sum_credit_no', 'count_credit_yes', 'count_credit_no', 'percentage']);
-        });
-
-        /** @var MorphToMany<Rating, \Illuminate\Database\Eloquent\Model, RatingMorph, 'pivot'> $relation */
-        $relation = $this->morphToMany(Rating::class, 'model', $pivot_table_full)
-            ->using($pivot_class)
-            ->withPivot($pivot_fields)
-            ->withTimestamps();
-
-        return $relation;
-=======
        
         $pivot_table_full = $pivot_table;
         
@@ -70,7 +44,6 @@ trait HasRating
             ->using($pivot_class)
             ->withPivot($pivot_fields)
             ->withTimestamps();
->>>>>>> d37c2e9 (.)
     }
 
     public function getOptionRatingsIdTitle(): array
@@ -101,21 +74,12 @@ trait HasRating
             $svgIcons = [
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm3.53 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v4.69a.75.75 0 001.5 0v-4.69l1.72 1.72a.75.75 0 001.06 0z" clip-rule="evenodd" /></svg>',
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" /></svg>',
-<<<<<<< HEAD
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>',
-            ];
-
-            // Use media if it already exists, otherwise don't try to create it
-            $ratings_array[$key]['image'] = method_exists($rating, 'getFirstMediaUrl') ? $rating->getFirstMediaUrl('rating') : null;
-
-=======
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" /></svg>'
             ];
             
             // Use media if it already exists, otherwise don't try to create it
             $ratings_array[$key]['image'] = method_exists($rating, 'getFirstMediaUrl') ? $rating->getFirstMediaUrl('rating') : null;
             
->>>>>>> d37c2e9 (.)
             // Add SVG icon directly to the array
             $ratings_array[$key]['svg_icon'] = $svgIcons[$key % count($svgIcons)];
             $ratings_array[$key]['effect'] = false;
@@ -140,11 +104,7 @@ trait HasRating
             $b = RatingMorph::where('model_id', $this->id)
                 ->where('user_id', '!=', null)
                 ->count();
-<<<<<<< HEAD
-            if ($b === 0) {
-=======
             if (0 === $b) {
->>>>>>> d37c2e9 (.)
                 $b = 1;
             }
 
@@ -175,18 +135,6 @@ trait HasRating
 
         return $result;
     }
-<<<<<<< HEAD
-
-    public function getVolumeCredit(?int $rating_id = null): float
-    {
-        $query = RatingMorph::where('model_id', $this->id)
-            ->where('user_id', '!=', null);
-
-        if ($rating_id !== null) {
-            $query->where('rating_id', $rating_id);
-        }
-
-=======
     
     public function getVolumeCredit(int $rating_id = null): float
     {
@@ -197,7 +145,6 @@ trait HasRating
             $query->where('rating_id', $rating_id);
         }
         
->>>>>>> d37c2e9 (.)
         return (float) $query->sum('points');
     }
 }
