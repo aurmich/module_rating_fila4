@@ -40,16 +40,8 @@ cache/
 
 # Backup files
 *.bak
-<<<<<<< HEAD
 *.backup
 *.backup.*
-=======
-<<<<<<< HEAD
-*.backup
-*.backup.*
-=======
->>>>>>> origin/develop
->>>>>>> d06edcd (.)
 
 # PHPStan documentation
 docs/phpstan/

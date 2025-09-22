@@ -4,16 +4,8 @@ declare(strict_types=1);
 
 namespace Modules\Rating\DataObjects;
 
-<<<<<<< HEAD
 use InvalidArgumentException;
 
-=======
-<<<<<<< HEAD
-use InvalidArgumentException;
-
-=======
->>>>>>> origin/develop
->>>>>>> d06edcd (.)
 final readonly class RatingData
 {
     /**
@@ -41,15 +33,7 @@ final readonly class RatingData
         public ?string $userId = null,
     ) {
         if ($score < 0 || $score > 5) {
-<<<<<<< HEAD
             throw new InvalidArgumentException('Score must be between 0 and 5');
-=======
-<<<<<<< HEAD
-            throw new InvalidArgumentException('Score must be between 0 and 5');
-=======
-            throw new \InvalidArgumentException('Score must be between 0 and 5');
->>>>>>> origin/develop
->>>>>>> d06edcd (.)
         }
     }
 }

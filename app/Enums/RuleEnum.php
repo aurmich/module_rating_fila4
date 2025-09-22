@@ -14,15 +14,7 @@ enum RuleEnum: string implements HasLabel
 
     public function getLabel(): string
     {
-<<<<<<< HEAD
         return (string) __('rating::enums.'.$this->name.'.label');
-=======
-<<<<<<< HEAD
-        return (string) __('rating::enums.'.$this->name.'.label');
-=======
-        return __('rating::enums.'.$this->name.'.label');
->>>>>>> origin/develop
->>>>>>> d06edcd (.)
 
         // or
         /*
