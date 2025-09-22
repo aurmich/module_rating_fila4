@@ -4,23 +4,41 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Resources;
 
+<<<<<<< HEAD
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+=======
+use Filament\Schemas\Components\Section;
+use Filament\Actions\EditAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Modules\Rating\Filament\Resources\RatingResource\Pages\ListRatings;
+use Modules\Rating\Filament\Resources\RatingResource\Pages\CreateRating;
+use Modules\Rating\Filament\Resources\RatingResource\Pages\EditRating;
+>>>>>>> d37c2e9 (.)
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+<<<<<<< HEAD
 use Filament\Schemas\Components\Section;
+=======
+use Filament\Tables;
+>>>>>>> d37c2e9 (.)
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Modules\Rating\Enums\RuleEnum;
+<<<<<<< HEAD
 use Modules\Rating\Filament\Resources\RatingResource\Pages\CreateRating;
 use Modules\Rating\Filament\Resources\RatingResource\Pages\EditRating;
 use Modules\Rating\Filament\Resources\RatingResource\Pages\ListRatings;
+=======
+use Modules\Rating\Filament\Resources\RatingResource\Pages;
+>>>>>>> d37c2e9 (.)
 use Modules\Rating\Models\Rating;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 
@@ -28,7 +46,11 @@ class RatingResource extends XotBaseResource
 {
     protected static ?string $model = Rating::class;
 
+<<<<<<< HEAD
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+=======
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+>>>>>>> d37c2e9 (.)
 
     public static function getFormSchema(): array
     {
@@ -39,7 +61,10 @@ class RatingResource extends XotBaseResource
             ColorPicker::make('color'),
             Radio::make('rule')->options(RuleEnum::class),
             Section::make()
+<<<<<<< HEAD
                 ->columnSpanFull()
+=======
+>>>>>>> d37c2e9 (.)
                 ->schema([
                     Toggle::make('is_disabled'),
                     Toggle::make('is_readonly'),

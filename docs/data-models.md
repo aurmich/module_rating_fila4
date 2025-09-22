@@ -1,4 +1,5 @@
 # Data Models
+<<<<<<< HEAD
 
 ## Rating Model
 
@@ -82,3 +83,5 @@ With the upgrade to Filament v4, ensure that:
 3. **Schema Methods**: Verify `form()`, `infolist()`, and schema method signatures
 4. **Enum Handling**: Add proper type hints for enum field states
 5. **Authorization**: Replace `can*()` methods with `get*AuthorizationResponse()`
+=======
+>>>>>>> d37c2e9 (.)

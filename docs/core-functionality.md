@@ -1,4 +1,5 @@
 # Core Functionality
+<<<<<<< HEAD
 
 ## Filament v4 Integration
 
@@ -154,3 +155,5 @@ class RatingResource extends Resource
     }
 }
 ```
+=======
+>>>>>>> d37c2e9 (.)
