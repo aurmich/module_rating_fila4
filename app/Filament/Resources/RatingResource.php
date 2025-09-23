@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Resources;
 
+use Filament\Support\Components\Component;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -28,10 +29,10 @@ class RatingResource extends XotBaseResource
 {
     protected static ?string $model = Rating::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     /**
-     * @return array<string, \Filament\Support\Components\Component>
+     * @return array<string, Component>
      */
     public static function getFormSchema(): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Blocks;
 
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Radio;
@@ -14,10 +15,6 @@ use Filament\Forms\Components\Toggle;
 use Illuminate\Support\Facades\App;
 use Modules\Rating\Datas\RatingData;
 use Modules\Rating\Enums\SupportedLocale;
-<<<<<<< HEAD
-use \Filament\Forms\Forms\Components\RadioImage;
-=======
->>>>>>> 2d63161 (.)
 use Modules\Xot\Actions\Filament\Block\GetViewBlocksOptionsByTypeAction;
 use Webmozart\Assert\Assert;
 
@@ -85,7 +82,7 @@ class Rating extends Block
                     ->options(is_array($blockOptions) ? array_map(fn ($value) => is_scalar($value) ? (string) $value : '', $blockOptions) : []),
 
                 Repeater::make('ratings')
-                    ->visible(fn (\Filament\Schemas\Components\Utilities\Get $get): bool => $get('locale') === App::getLocale())
+                    ->visible(fn (Get $get): bool => $get('locale') === App::getLocale())
                     ->relationship()
                     ->schema([
                         TextInput::make('id')->disabled(),
