@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Resources;
 
+<<<<<<< HEAD
 use Filament\Support\Components\Component;
+=======
+>>>>>>> 97af477 (.)
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -29,7 +32,7 @@ class RatingResource extends XotBaseResource
 {
     protected static ?string $model = Rating::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     /**
      * @return array<string, Component>
@@ -37,12 +40,22 @@ class RatingResource extends XotBaseResource
     public static function getFormSchema(): array
     {
         return [
+<<<<<<< HEAD
             'extra_attributes.type' => TextInput::make('extra_attributes.type'),
             'extra_attributes.anno' => TextInput::make('extra_attributes.anno'),
             'title' => TextInput::make('title')->autofocus()->required(),
             'color' => ColorPicker::make('color'),
             'rule' => Radio::make('rule')->options(RuleEnum::class),
             'flags' => Section::make()
+=======
+            TextInput::make('extra_attributes.type'),
+            TextInput::make('extra_attributes.anno'),
+            TextInput::make('title')->autofocus()->required(),
+            ColorPicker::make('color'),
+            Radio::make('rule')->options(RuleEnum::class),
+            Section::make()
+                ->columnSpanFull()
+>>>>>>> 97af477 (.)
                 ->schema([
                     Toggle::make('is_disabled'),
                     Toggle::make('is_readonly'),

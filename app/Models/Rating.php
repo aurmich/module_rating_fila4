@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models;
 
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
-use Modules\Xot\Contracts\ProfileContract;
-use Modules\Rating\Database\Factories\RatingFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
+use Modules\Rating\Database\Factories\RatingFactory;
 use Modules\Rating\Enums\RuleEnum;
+use Modules\Xot\Contracts\ProfileContract;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
 
 /**
@@ -46,6 +46,9 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  * @property bool|null $is_disabled
  * @property bool|null $is_readonly
  * @property int|null $order_column
+ * @property float|null $current_price
+ * @property int|null $predict_id
+ * @property float|null $outstanding_shares
  * @property Model|Eloquent $linkedTo
  *
  * @method static Builder|Rating whereColor($value)
@@ -69,6 +72,7 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  * @property int|null $media_count
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
+ * @property-read RatingMorph|null $pivot
  *
  * @mixin Eloquent
  *
@@ -80,12 +84,23 @@ class Rating extends BaseModel implements HasMedia
 {
     use InteractsWithMedia;
 
-    public $casts = [
-        'extra_attributes' => SchemalessAttributes::class,
-        'rule' => RuleEnum::class,
-        'is_disabled' => 'boolean',
-        'is_readonly' => 'boolean',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    public function casts(): array
+    {
+        return [
+            'extra_attributes' => SchemalessAttributes::class,
+            'rule' => RuleEnum::class,
+            'is_disabled' => 'boolean',
+            'is_readonly' => 'boolean',
+            'current_price' => 'float',
+            'outstanding_shares' => 'float',
+            'probability' => 'float',
+        ];
+    }
 
     protected $fillable = [
         'id',
@@ -96,7 +111,11 @@ class Rating extends BaseModel implements HasMedia
         'rule',
         'is_disabled',
         'is_readonly',
+        'current_price',
+        'predict_id',
+        'outstanding_shares',
         'order_column',
+        'probability',
     ];
 
     public function scopeWithExtraAttributes(): Builder
