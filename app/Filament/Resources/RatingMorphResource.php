@@ -9,7 +9,11 @@ use Filament\Actions\DeleteBulkAction;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\ListRatingMorphs;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\CreateRatingMorph;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\EditRatingMorph;
+<<<<<<< HEAD
 use Filament\Forms\Form;
+=======
+use Filament\Schemas\Schema;
+>>>>>>> dea9ef7 (.)
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages;
