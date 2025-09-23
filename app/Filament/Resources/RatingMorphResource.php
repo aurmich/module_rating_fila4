@@ -10,10 +10,14 @@ use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\ListRatingMorphs
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\CreateRatingMorph;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\EditRatingMorph;
 <<<<<<< HEAD
+<<<<<<< HEAD
 use Filament\Forms\Form;
 =======
 use Filament\Schemas\Schema;
 >>>>>>> dea9ef7 (.)
+=======
+use Filament\Schemas\Schema;
+>>>>>>> 2d63161 (.)
 use Filament\Tables;
 use Filament\Tables\Table;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages;

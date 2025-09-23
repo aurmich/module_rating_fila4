@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Blocks;
 
-use Filament\Schemas\Components\Utilities\Get;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -14,7 +14,10 @@ use Filament\Forms\Components\Toggle;
 use Illuminate\Support\Facades\App;
 use Modules\Rating\Datas\RatingData;
 use Modules\Rating\Enums\SupportedLocale;
+<<<<<<< HEAD
 use \Filament\Forms\Forms\Components\RadioImage;
+=======
+>>>>>>> 2d63161 (.)
 use Modules\Xot\Actions\Filament\Block\GetViewBlocksOptionsByTypeAction;
 use Webmozart\Assert\Assert;
 
@@ -29,6 +32,7 @@ class Rating extends Block
     {
         // Ensure we're passing a string to make()
         Assert::stringNotEmpty(static::BLOCK_TYPE, 'Block type must be a non-empty string');
+
         return parent::make(static::BLOCK_TYPE)
             ->schema([
                 TextInput::make('title')
@@ -53,7 +57,7 @@ class Rating extends Block
     /**
      * Create rating data from form data.
      *
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      */
     public static function createFromFormData(array $data): RatingData
     {
@@ -63,7 +67,7 @@ class Rating extends Block
     /**
      * Create a new rating block with advanced options.
      *
-     * @param array<string,mixed> $options
+     * @param  array<string,mixed>  $options
      */
     public static function createAdvanced(
         string $name = self::BLOCK_TYPE,
@@ -77,8 +81,8 @@ class Rating extends Block
 
         return Block::make($name)
             ->schema([
-                RadioImage::make('view')
-                    ->options(is_array($blockOptions) ? array_map(fn($value) => is_scalar($value) ? (string)$value : '', $blockOptions) : []),
+                Radio::make('view')
+                    ->options(is_array($blockOptions) ? array_map(fn ($value) => is_scalar($value) ? (string) $value : '', $blockOptions) : []),
 
                 Repeater::make('ratings')
                     ->visible(fn (\Filament\Schemas\Components\Utilities\Get $get): bool => $get('locale') === App::getLocale())

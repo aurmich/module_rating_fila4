@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Resources;
 
-use Filament\Schemas\Components\Section;
-use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Modules\Rating\Filament\Resources\RatingResource\Pages\ListRatings;
-use Modules\Rating\Filament\Resources\RatingResource\Pages\CreateRating;
-use Modules\Rating\Filament\Resources\RatingResource\Pages\EditRating;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Tables;
+use Filament\Schemas\Components\Section;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Modules\Rating\Enums\RuleEnum;
-use Modules\Rating\Filament\Resources\RatingResource\Pages;
+use Modules\Rating\Filament\Resources\RatingResource\Pages\CreateRating;
+use Modules\Rating\Filament\Resources\RatingResource\Pages\EditRating;
+use Modules\Rating\Filament\Resources\RatingResource\Pages\ListRatings;
 use Modules\Rating\Models\Rating;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 
@@ -30,22 +28,25 @@ class RatingResource extends XotBaseResource
 {
     protected static ?string $model = Rating::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * @return array<string, \Filament\Support\Components\Component>
+     */
     public static function getFormSchema(): array
     {
         return [
-            TextInput::make('extra_attributes.type'),
-            TextInput::make('extra_attributes.anno'),
-            TextInput::make('title')->autofocus()->required(),
-            ColorPicker::make('color'),
-            Radio::make('rule')->options(RuleEnum::class),
-            Section::make()
+            'extra_attributes.type' => TextInput::make('extra_attributes.type'),
+            'extra_attributes.anno' => TextInput::make('extra_attributes.anno'),
+            'title' => TextInput::make('title')->autofocus()->required(),
+            'color' => ColorPicker::make('color'),
+            'rule' => Radio::make('rule')->options(RuleEnum::class),
+            'flags' => Section::make()
                 ->schema([
                     Toggle::make('is_disabled'),
                     Toggle::make('is_readonly'),
                 ]),
-            RichEditor::make('txt')->columnSpanFull(),
+            'txt' => RichEditor::make('txt')->columnSpanFull(),
         ];
     }
 
