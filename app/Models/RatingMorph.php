@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models;
 
-use Illuminate\Support\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Xot\Contracts\UserContract;
-use Modules\Xot\Contracts\ProfileContract;
-use Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
+use Modules\Xot\Contracts\ProfileContract;
+use Modules\Xot\Contracts\UserContract;
 use Modules\Xot\Datas\XotData;
 
 /**

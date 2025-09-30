@@ -2,8 +2,8 @@
 
 namespace Modules\Rating\Database\Factories;
 
-use Modules\Rating\Models\Rating;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Rating\Models\Rating;
 
 class RatingFactory extends Factory
 {
@@ -20,4 +20,3 @@ class RatingFactory extends Factory
         return [];
     }
 }
-

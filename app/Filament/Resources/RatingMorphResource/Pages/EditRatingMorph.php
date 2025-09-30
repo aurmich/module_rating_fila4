@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Resources\RatingMorphResource\Pages;
 
-use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
 use Filament\Actions\DeleteAction;
-use Filament\Pages\Actions;
 use Modules\Rating\Filament\Resources\RatingMorphResource;
+use Modules\Xot\Filament\Resources\Pages\XotBaseEditRecord;
 
 class EditRatingMorph extends XotBaseEditRecord
 {

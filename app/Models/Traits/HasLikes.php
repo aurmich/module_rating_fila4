@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Modules\Rating\Models\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use Modules\Xot\Contracts\UserContract;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Rating\Models\Like;
+use Modules\Xot\Contracts\UserContract;
 
 trait HasLikes
 {
@@ -22,7 +22,7 @@ trait HasLikes
     /**
      * param \Modules\Xot\Contracts\UserContract|null $user.
      *
-     * @param UserContract|null $user
+     * @param  UserContract|null  $user
      */
     public function likedBy($user): void
     {
@@ -34,7 +34,7 @@ trait HasLikes
     /**
      * param \Modules\Xot\Contracts\UserContract|null $user.
      *
-     * @param UserContract|null $user
+     * @param  UserContract|null  $user
      */
     public function dislikedBy($user): void
     {
@@ -63,7 +63,7 @@ trait HasLikes
     /**
      * param \Modules\Xot\Contracts\UserContract|null $user.
      *
-     * @param UserContract|null $user
+     * @param  UserContract|null  $user
      * @return bool
      */
     public function isLikedBy($user)

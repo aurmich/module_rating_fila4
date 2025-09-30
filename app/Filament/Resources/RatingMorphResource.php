@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Filament\Resources;
 
-use Filament\Actions\EditAction;
 use Filament\Actions\DeleteBulkAction;
-use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\ListRatingMorphs;
+use Filament\Actions\EditAction;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\CreateRatingMorph;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\EditRatingMorph;
-use Filament\Schemas\Schema;
-use Filament\Tables;
-use Filament\Tables\Table;
+use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\ListRatingMorphs;
+use Filament\Tables\Table as FilamentTable;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages;
 use Modules\Rating\Models\RatingMorph;
 use Modules\Xot\Filament\Resources\XotBaseResource;
@@ -20,7 +18,7 @@ class RatingMorphResource extends XotBaseResource
 {
     protected static ?string $model = RatingMorph::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getFormSchema(): array
     {
@@ -29,7 +27,7 @@ class RatingMorphResource extends XotBaseResource
         ];
     }
 
-    public static function table(Table $table): Table
+    public static function table(FilamentTable $table): FilamentTable
     {
         return $table
             ->columns([

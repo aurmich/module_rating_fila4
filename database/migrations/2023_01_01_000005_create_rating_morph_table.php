@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Modules\Xot\Datas\XotData;
 use Illuminate\Database\Schema\Blueprint;
+use Modules\Rating\Models\Rating;
 // ----- models -----
 
-use Modules\Rating\Models\Rating;
 use Modules\Xot\Database\Migrations\XotBaseMigration;
+use Modules\Xot\Datas\XotData;
 
 /*
  * Class CreateRatingMorphTable.
@@ -51,7 +51,7 @@ return new class extends XotBaseMigration
                     $table->boolean('is_winner')->default(0);
                 }
 
-                if (! $this->hasColumn('reward')) { 
+                if (! $this->hasColumn('reward')) {
                     $table->decimal('reward', 10, 3)->default(0);
                 }
 
@@ -60,7 +60,6 @@ return new class extends XotBaseMigration
                 } else {
                     $table->decimal('value', 10, 3)->nullable();
                 }
-
 
                 $this->updateTimestamps(table: $table, hasSoftDeletes: true);
             }

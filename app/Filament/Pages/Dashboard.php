@@ -9,5 +9,5 @@ use Modules\Xot\Filament\Pages\XotBaseDashboard;
 class Dashboard extends XotBaseDashboard
 {
 
-    protected string $view = 'rating::filament.pages.dashboard';
-} 
+    
+}

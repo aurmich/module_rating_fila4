@@ -6,8 +6,6 @@ namespace Modules\Rating\Filament\Resources\RatingMorphResource\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Pages\Actions;
-use Filament\Tables\Columns;
 use Modules\Rating\Filament\Resources\RatingMorphResource;
 use Modules\Xot\Filament\Resources\Pages\XotBaseListRecords;
 

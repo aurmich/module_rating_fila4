@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models\Traits;
 
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use ReflectionException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 // //use Laravel\Scout\Searchable;
 
 // ----- models------
-use Illuminate\Support\Facades\Auth;
-// ---- services -----
 use Modules\Cms\Services\PanelService as Panel;
+// ---- services -----
 use Modules\Rating\Models\Rating;
+use ReflectionException;
 
 // ------ traits ---
 
@@ -85,8 +85,7 @@ trait RatingTrait
     // ----- mutators -----
     // *
     /**
-     * @param float $value
-     *
+     * @param  float  $value
      * @return Collection
      */
     public function getMyRatingAttribute($value)
@@ -101,11 +100,11 @@ trait RatingTrait
      */
     public function getRatingsAvgAttribute(?float $value): ?float
     {
-        if (null !== $value) {
+        if ($value !== null) {
             return $value;
         }
         $value = $this->ratings->avg('pivot.rating');
-        if (null !== $value) {
+        if ($value !== null) {
             $this->ratings_avg = $value;
             $this->save();
         }
@@ -115,7 +114,7 @@ trait RatingTrait
 
     public function getRatingsCountAttribute(?int $value): ?int
     {
-        if (null !== $value) {
+        if ($value !== null) {
             return $value;
         }
         // Method Illuminate\Support\Collection<int,Modules\Rating\Models\Rating>::count() invoked with 1 parameter, 0 required.
