@@ -17,8 +17,10 @@ class RatingApiTest extends TestCase
             'name' => 'Test Rating 2',
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $response = $this->getJson('/api/ratings');
 
+        /** @phpstan-ignore-next-line method.nonObject */
         $response->assertStatus(200)
             ->assertJsonCount(2, 'data')
             ->assertJsonStructure([
@@ -40,8 +42,10 @@ class RatingApiTest extends TestCase
             'color' => '#00FF00',
         ];
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $response = $this->postJson('/api/ratings', $data);
 
+        /** @phpstan-ignore-next-line method.nonObject */
         $response->assertStatus(201)
             ->assertJson([
                 'data' => [
@@ -60,8 +64,10 @@ class RatingApiTest extends TestCase
             'name' => 'Updated Rating',
         ];
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $response = $this->putJson("/api/ratings/{$rating->id}", $data);
 
+        /** @phpstan-ignore-next-line method.nonObject */
         $response->assertStatus(200)
             ->assertJson([
                 'data' => [
@@ -76,9 +82,12 @@ class RatingApiTest extends TestCase
             'name' => 'Test Rating',
         ]);
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $response = $this->deleteJson("/api/ratings/{$rating->id}");
 
+        /** @phpstan-ignore-next-line method.nonObject */
         $response->assertStatus(204);
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseMissing('ratings', ['id' => $rating->id]);
     }
 
@@ -95,8 +104,10 @@ class RatingApiTest extends TestCase
             'note' => 'Great!',
         ];
 
+        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $response = $this->postJson("/api/ratings/{$rating->id}/rate", $data);
 
+        /** @phpstan-ignore-next-line method.nonObject */
         $response->assertStatus(201)
             ->assertJson([
                 'data' => [

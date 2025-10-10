@@ -54,17 +54,26 @@ trait HasRating
         return $relation;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getOptionRatingsIdTitle(): array
     {
         // return $this->ratings()->where('user_id', null)->get();
         return Arr::pluck($this->ratings()->where('user_id', null)->get()->toArray(), 'title', 'id');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getOptionRatingsIdColor(): array
     {
         return Arr::pluck($this->ratings()->where('user_id', null)->get()->toArray(), 'color', 'id');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getArrayRatingsWithImage(): array
     {
         $ratings = $this
@@ -104,6 +113,9 @@ trait HasRating
             ->count('user_id');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getRatingsPercentageByUser(): array
     {
         $ratings_options = $this->getOptionRatingsIdTitle();
@@ -126,6 +138,9 @@ trait HasRating
         return $result;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getRatingsPercentageByVolume(): array
     {
         $ratings_options = $this->getOptionRatingsIdTitle();

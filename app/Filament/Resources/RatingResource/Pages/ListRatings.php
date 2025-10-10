@@ -13,6 +13,9 @@ class ListRatings extends XotBaseListRecords
 {
     protected static string $resource = RatingResource::class;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getTableColumns(): array
     {
         return [

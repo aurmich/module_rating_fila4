@@ -80,6 +80,7 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  *
  * @mixin Eloquent
  */
+/** */
 class Rating extends BaseModel implements HasMedia
 {
     use InteractsWithMedia;

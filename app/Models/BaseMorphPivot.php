@@ -53,6 +53,9 @@ abstract class BaseMorphPivot extends MorphPivot
         'note',
     ];
 
+    /**
+     * @return array<string, mixed>
+     */
     public function casts(): array
     {
         return [
