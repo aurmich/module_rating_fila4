@@ -119,9 +119,18 @@ class Rating extends BaseModel implements HasMedia
         'probability',
     ];
 
-    public function scopeWithExtraAttributes(): Builder
+    /**
+     * @return Builder
+     */
+    public function scopeWithExtraAttributes(Builder $query): Builder
     {
-        return $this->extra_attributes->modelScope();
+        if (property_exists($this, 'extra_attributes') && is_object($this->extra_attributes) && method_exists($this->extra_attributes, 'modelScope')) {
+            $result = $this->extra_attributes->modelScope();
+            if ($result instanceof Builder) {
+                return $result;
+            }
+        }
+        return $query;
     }
 
     public function linkedTo(): MorphTo
