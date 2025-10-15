@@ -80,7 +80,46 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  *
  * @mixin Eloquent
  */
-/** */
+/**
+ * @property string $id
+ * @property string|null $title
+ * @property string|null $color
+ * @property string|null $icon
+ * @property RuleEnum|null $rule
+ * @property string|null $txt
+ * @property bool|null $is_disabled
+ * @property bool|null $is_readonly
+ * @property int|null $order_column
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $updated_by
+ * @property string|null $created_by
+ * @property \Spatie\SchemalessAttributes\SchemalessAttributes $extra_attributes
+ * @property-read \Modules\Fixcity\Models\Profile|null $creator
+ * @property-read Model|\Eloquent $linkedTo
+ * @property-read MediaCollection<int, \Modules\Media\Models\Media> $media
+ * @property-read int|null $media_count
+ * @property-read \Modules\Fixcity\Models\Profile|null $updater
+ * @method static \Modules\Rating\Database\Factories\RatingFactory factory($count = null, $state = [])
+ * @method static Builder<static>|Rating newModelQuery()
+ * @method static Builder<static>|Rating newQuery()
+ * @method static Builder<static>|Rating query()
+ * @method static Builder<static>|Rating whereColor($value)
+ * @method static Builder<static>|Rating whereCreatedAt($value)
+ * @method static Builder<static>|Rating whereCreatedBy($value)
+ * @method static Builder<static>|Rating whereIcon($value)
+ * @method static Builder<static>|Rating whereId($value)
+ * @method static Builder<static>|Rating whereIsDisabled($value)
+ * @method static Builder<static>|Rating whereIsReadonly($value)
+ * @method static Builder<static>|Rating whereOrderColumn($value)
+ * @method static Builder<static>|Rating whereRule($value)
+ * @method static Builder<static>|Rating whereTitle($value)
+ * @method static Builder<static>|Rating whereTxt($value)
+ * @method static Builder<static>|Rating whereUpdatedAt($value)
+ * @method static Builder<static>|Rating whereUpdatedBy($value)
+ * @method static Builder<static>|Rating withExtraAttributes()
+ * @mixin Eloquent
+ */
 class Rating extends BaseModel implements HasMedia
 {
     use InteractsWithMedia;

@@ -4,63 +4,28 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Modules\Xot\Traits\Updater;
-
 /**
  * Class BaseModel.
+ *
+ * Base model for Rating module.
+ * Extends XotBaseModel for common functionality.
  */
-abstract class BaseModel extends Model
+abstract class BaseModel extends \Modules\Xot\Models\XotBaseModel
 {
-    use \Modules\Xot\Models\Traits\HasXotFactory;
-    use Updater;
-
-    /**
-     * Indicates whether attributes are snake cased on arrays.
-     *
-     * @see  https://laravel-news.com/6-eloquent-secrets
-     *
-     * @var bool
-     */
-    public static $snakeAttributes = true;
-
-    /** @var bool */
-    public $incrementing = true;
-
-    /** @var bool */
-    public $timestamps = true;
-
-    /** @var int */
-    protected $perPage = 30;
-
-    /** @var string */
+    /** @var string Database connection name */
     protected $connection = 'rating';
 
-    /** @var list<string> */
-    protected $fillable = ['id'];
-
-    /** @var string */
-    protected $primaryKey = 'id';
-
-    /** @var string */
-    protected $keyType = 'string';
-
-    /** @var list<string> */
-    protected $hidden = [
-        // 'password'
-    ];
-
-    /** @return array<string, string> */
-    public function casts(): array
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
     {
-        return [
-            'id' => 'string',
-            'uuid' => 'string',
-            // 'published_at' => 'datetime:Y-m-d', // da verificare
-            'published_at' => 'datetime',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-        ];
+        return array_merge(parent::casts(), [
+            // Module-specific casts only
+            // Common casts (id, uuid, published_at, created_at, updated_at, etc.)
+            // are inherited from XotBaseModel
+        ]);
     }
 }

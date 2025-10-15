@@ -60,6 +60,7 @@ trait HasRating
     public function getOptionRatingsIdTitle(): array
     {
         // return $this->ratings()->where('user_id', null)->get();
+        /** @var array<string, mixed> */
         return Arr::pluck($this->ratings()->where('user_id', null)->get()->toArray(), 'title', 'id');
     }
 
@@ -68,6 +69,7 @@ trait HasRating
      */
     public function getOptionRatingsIdColor(): array
     {
+        /** @var array<string, mixed> */
         return Arr::pluck($this->ratings()->where('user_id', null)->get()->toArray(), 'color', 'id');
     }
 
@@ -102,6 +104,7 @@ trait HasRating
             $ratings_array[$key]['effect'] = false;
         }
 
+        /** @var array<string, mixed> */
         return $ratings_array;
     }
 
@@ -152,6 +155,7 @@ trait HasRating
         }
 
         foreach ($ratings_options as $key => $value) {
+            /* @phpstan-ignore-next-line argument.type */
             $volume = $this->getVolumeCredit($key);
             $result[$key] = round(($volume * 100) / $total_volume, 0);
         }
