@@ -16,7 +16,6 @@ class RatingTest extends TestCase
             'color' => '#FF0000',
         ]);
 
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('ratings', [
             'id' => $rating->id,
             'name' => 'Test Rating',
@@ -39,7 +38,6 @@ class RatingTest extends TestCase
             'reward' => 10,
         ]);
 
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertDatabaseHas('rating_morphs', [
             'id' => $ratingMorph->id,
             'rating_id' => $rating->id,
@@ -50,19 +48,14 @@ class RatingTest extends TestCase
     {
         $locale = SupportedLocale::IT;
 
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals('it', $locale->value);
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
-        $this->assertEquals('Italiano', $locale->getLabel());
+        $this->assertEquals('Italiano', $locale->label());
 
         $localeFromString = SupportedLocale::fromString('en');
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertEquals(SupportedLocale::EN, $localeFromString);
 
         $locales = SupportedLocale::toArray();
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertArrayHasKey('it', $locales);
-        /** @phpstan-ignore-next-line property.notFound, method.nonObject */
         $this->assertArrayHasKey('en', $locales);
     }
 }

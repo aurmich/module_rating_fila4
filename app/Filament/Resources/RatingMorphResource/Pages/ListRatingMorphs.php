@@ -20,9 +20,6 @@ class ListRatingMorphs extends XotBaseListRecords
         ];
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getTableColumns(): array
     {
         return [

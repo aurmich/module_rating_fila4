@@ -31,9 +31,8 @@ class StatsOverview extends BaseWidget
         foreach ($ratings as $rating) {
             $sum = app(GetSumByModelRatingIdAction::class)->execute($this->record, (string) $rating->id);
             $count = app(GetCountByModelRatingIdAction::class)->execute($this->record, (string) $rating->id);
-            $title = $rating->title ?? 'Rating';
-            $stats[] = Stat::make((string) $title, $sum)->descriptionIcon('icon-bottlecap')->description('volume');
-            $stats[] = Stat::make((string) $title, $count)->descriptionIcon('heroicon-o-users')->description('players')->color('success');
+            $stats[] = Stat::make((string) $rating->title, $sum)->descriptionIcon('icon-bottlecap')->description('volume');
+            $stats[] = Stat::make((string) $rating->title, $count)->descriptionIcon('heroicon-o-users')->description('players')->color('success');
         }
 
         $sum = app(GetSumByModelRatingIdAction::class)->execute($this->record);

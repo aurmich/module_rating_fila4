@@ -6,11 +6,10 @@ namespace Modules\Rating\Filament\Resources;
 
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Table;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\CreateRatingMorph;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\EditRatingMorph;
 use Modules\Rating\Filament\Resources\RatingMorphResource\Pages\ListRatingMorphs;
-use Filament\Tables\Table as FilamentTable;
-use Modules\Rating\Filament\Resources\RatingMorphResource\Pages;
 use Modules\Rating\Models\RatingMorph;
 use Modules\Xot\Filament\Resources\XotBaseResource;
 
@@ -27,7 +26,7 @@ class RatingMorphResource extends XotBaseResource
         ];
     }
 
-    public static function table(FilamentTable $table): FilamentTable
+    public static function table(Table $table): Table
     {
         return $table
             ->columns([

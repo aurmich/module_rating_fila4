@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
@@ -22,11 +21,6 @@ use Modules\Rating\Models\RatingMorph;
 trait HasRating
 {
     //  laravel/Modules/Xot/app/Models/Traits/RelationX.php  poi passare a morphToManyX per standardizzare
-    /**
-     * Relazione morphToMany con il modello Rating
-     *
-     * @return MorphToMany<Rating, Model, RatingMorph, 'pivot'>
-     */
     public function ratings(): MorphToMany
     {
         $class = static::class;
@@ -41,41 +35,26 @@ trait HasRating
         $pivot_table_full = $pivot_table;
 
         $pivot_fields = array_filter($pivot->getFillable(), function ($field) {
-
             return ! in_array($field, ['sum_credit_yes', 'sum_credit_no', 'count_credit_yes', 'count_credit_no', 'percentage']);
         });
 
-        /** @var MorphToMany<Rating, Model, RatingMorph, 'pivot'> $relation */
-        $relation = $this->morphToMany(Rating::class, 'model', $pivot_table_full)
+        return $this->morphToMany(Rating::class, 'model', $pivot_table_full)
             ->using($pivot_class)
             ->withPivot($pivot_fields)
             ->withTimestamps();
-
-        return $relation;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getOptionRatingsIdTitle(): array
     {
         // return $this->ratings()->where('user_id', null)->get();
-        /** @var array<string, mixed> */
         return Arr::pluck($this->ratings()->where('user_id', null)->get()->toArray(), 'title', 'id');
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getOptionRatingsIdColor(): array
     {
-        /** @var array<string, mixed> */
         return Arr::pluck($this->ratings()->where('user_id', null)->get()->toArray(), 'color', 'id');
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getArrayRatingsWithImage(): array
     {
         $ratings = $this
@@ -104,7 +83,6 @@ trait HasRating
             $ratings_array[$key]['effect'] = false;
         }
 
-        /** @var array<string, mixed> */
         return $ratings_array;
     }
 
@@ -116,9 +94,6 @@ trait HasRating
             ->count('user_id');
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getRatingsPercentageByUser(): array
     {
         $ratings_options = $this->getOptionRatingsIdTitle();
@@ -141,9 +116,6 @@ trait HasRating
         return $result;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function getRatingsPercentageByVolume(): array
     {
         $ratings_options = $this->getOptionRatingsIdTitle();
@@ -155,7 +127,6 @@ trait HasRating
         }
 
         foreach ($ratings_options as $key => $value) {
-            /* @phpstan-ignore-next-line argument.type */
             $volume = $this->getVolumeCredit($key);
             $result[$key] = round(($volume * 100) / $total_volume, 0);
         }

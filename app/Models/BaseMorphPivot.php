@@ -10,7 +10,7 @@ use Modules\Xot\Traits\Updater;
 /**
  * Class BaseMorphPivot.
  */
-abstract class BaseMorphPivot extends \Modules\Xot\Models\XotBaseMorphPivot
+abstract class BaseMorphPivot extends MorphPivot
 {
     use Updater;
 
@@ -53,9 +53,6 @@ abstract class BaseMorphPivot extends \Modules\Xot\Models\XotBaseMorphPivot
         'note',
     ];
 
-    /**
-     * @return array<string, mixed>
-     */
     public function casts(): array
     {
         return [
