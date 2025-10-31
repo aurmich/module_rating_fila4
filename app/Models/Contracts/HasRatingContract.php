@@ -7,6 +7,7 @@ namespace Modules\Rating\Models\Contracts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Modules\Rating\Models\Rating;
+use Modules\Rating\Models\RatingMorph;
 
 /**
  * --.
@@ -14,7 +15,7 @@ use Modules\Rating\Models\Rating;
 interface HasRatingContract
 {
     /**
-     * @return MorphToMany<Rating, Rating|Model>
+     * @return MorphToMany<Rating, Model, RatingMorph, 'pivot'>
      */
     public function ratings(): MorphToMany;
 }
