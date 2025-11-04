@@ -46,9 +46,6 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  * @property bool|null $is_disabled
  * @property bool|null $is_readonly
  * @property int|null $order_column
- * @property float|null $current_price
- * @property int|null $predict_id
- * @property float|null $outstanding_shares
  * @property Model|Eloquent $linkedTo
  *
  * @method static Builder|Rating whereColor($value)
@@ -72,7 +69,6 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  * @property int|null $media_count
  * @property ProfileContract|null $creator
  * @property ProfileContract|null $updater
- * @property-read RatingMorph|null $pivot
  *
  * @mixin Eloquent
  *
@@ -80,67 +76,16 @@ use Spatie\SchemalessAttributes\Casts\SchemalessAttributes;
  *
  * @mixin Eloquent
  */
-/**
- * @property string $id
- * @property string|null $title
- * @property string|null $color
- * @property string|null $icon
- * @property RuleEnum|null $rule
- * @property string|null $txt
- * @property bool|null $is_disabled
- * @property bool|null $is_readonly
- * @property int|null $order_column
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property string|null $updated_by
- * @property string|null $created_by
- * @property \Spatie\SchemalessAttributes\SchemalessAttributes $extra_attributes
- * @property-read \Modules\Fixcity\Models\Profile|null $creator
- * @property-read Model|\Eloquent $linkedTo
- * @property-read MediaCollection<int, \Modules\Media\Models\Media> $media
- * @property-read int|null $media_count
- * @property-read \Modules\Fixcity\Models\Profile|null $updater
- * @method static \Modules\Rating\Database\Factories\RatingFactory factory($count = null, $state = [])
- * @method static Builder<static>|Rating newModelQuery()
- * @method static Builder<static>|Rating newQuery()
- * @method static Builder<static>|Rating query()
- * @method static Builder<static>|Rating whereColor($value)
- * @method static Builder<static>|Rating whereCreatedAt($value)
- * @method static Builder<static>|Rating whereCreatedBy($value)
- * @method static Builder<static>|Rating whereIcon($value)
- * @method static Builder<static>|Rating whereId($value)
- * @method static Builder<static>|Rating whereIsDisabled($value)
- * @method static Builder<static>|Rating whereIsReadonly($value)
- * @method static Builder<static>|Rating whereOrderColumn($value)
- * @method static Builder<static>|Rating whereRule($value)
- * @method static Builder<static>|Rating whereTitle($value)
- * @method static Builder<static>|Rating whereTxt($value)
- * @method static Builder<static>|Rating whereUpdatedAt($value)
- * @method static Builder<static>|Rating whereUpdatedBy($value)
- * @method static Builder<static>|Rating withExtraAttributes()
- * @mixin Eloquent
- */
 class Rating extends BaseModel implements HasMedia
 {
     use InteractsWithMedia;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    public function casts(): array
-    {
-        return [
-            'extra_attributes' => SchemalessAttributes::class,
-            'rule' => RuleEnum::class,
-            'is_disabled' => 'boolean',
-            'is_readonly' => 'boolean',
-            'current_price' => 'float',
-            'outstanding_shares' => 'float',
-            'probability' => 'float',
-        ];
-    }
+    public $casts = [
+        'extra_attributes' => SchemalessAttributes::class,
+        'rule' => RuleEnum::class,
+        'is_disabled' => 'boolean',
+        'is_readonly' => 'boolean',
+    ];
 
     protected $fillable = [
         'id',
@@ -151,25 +96,12 @@ class Rating extends BaseModel implements HasMedia
         'rule',
         'is_disabled',
         'is_readonly',
-        'current_price',
-        'predict_id',
-        'outstanding_shares',
         'order_column',
-        'probability',
     ];
 
-    /**
-     * @return Builder
-     */
-    public function scopeWithExtraAttributes(Builder $query): Builder
+    public function scopeWithExtraAttributes(): Builder
     {
-        if (property_exists($this, 'extra_attributes') && is_object($this->extra_attributes) && method_exists($this->extra_attributes, 'modelScope')) {
-            $result = $this->extra_attributes->modelScope();
-            if ($result instanceof Builder) {
-                return $result;
-            }
-        }
-        return $query;
+        return $this->extra_attributes->modelScope();
     }
 
     public function linkedTo(): MorphTo
