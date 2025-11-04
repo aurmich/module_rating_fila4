@@ -106,7 +106,11 @@ trait RatingTrait
         $value = $this->ratings->avg('pivot.rating');
         if ($value !== null) {
             $this->ratings_avg = $value;
-            $this->save();
+            
+            // Guard: modello deve avere PK per salvare
+            if (null != $this->getKey()) {
+                $this->save();
+            }
         }
 
         return $value;
@@ -121,6 +125,12 @@ trait RatingTrait
         // $value = $this->ratings->count('pivot.rating');
         $value = $this->ratings->count(); // ?? forse fare filtro
         $this->ratings_count = $value;
+        
+        // Guard: modello deve avere PK per salvare
+        if (null == $this->getKey()) {
+            return $value;
+        }
+        
         $this->save();
 
         return $value;

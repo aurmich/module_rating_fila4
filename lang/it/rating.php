@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'resource' => [
         'name' => [
@@ -162,6 +164,10 @@ return [
                     'label' => 'Codice inventario genitore',
                 ],
             ],
+        ],
+        'delete' => [
+            'tooltip' => 'delete',
+            'icon' => 'delete',
         ],
     ],
     'widgets' => [
