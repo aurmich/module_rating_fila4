@@ -15,7 +15,7 @@ use Modules\Xot\Traits\Updater;
  */
 abstract class BaseModel extends Model
 {
-    use HasFactory;
+    use \Modules\Xot\Models\Traits\HasXotFactory;
     use Updater;
 
     /**
