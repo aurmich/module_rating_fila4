@@ -11,7 +11,7 @@ return [
         ],
         'label' => 'Rating Morph',
         'sort' => 6,
-        'icon' => 'rating morph.navigation',
+        'icon' => 'heroicon-o-star',
     ],
     'fields' => [
         'name' => [

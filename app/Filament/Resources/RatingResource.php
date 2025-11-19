@@ -29,7 +29,7 @@ class RatingResource extends XotBaseResource
 {
     protected static ?string $model = Rating::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     /**
      * @return array<string, Component>

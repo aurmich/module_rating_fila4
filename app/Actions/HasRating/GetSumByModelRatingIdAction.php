@@ -22,9 +22,9 @@ class GetSumByModelRatingIdAction
         if ($rating_id !== null) {
             $opts = $opts->wherePivot('rating_id', $rating_id);
         }
-        $opts = (float) $opts->sum('rating_morph.value');
-        Assert::float($opts, '['.__LINE__.']['.__FILE__.']');
+        $sum = $opts->sum('rating_morph.value');
+        $result = is_numeric($sum) ? (float) $sum : 0.0;
 
-        return $opts;
+        return $result;
     }
 }
