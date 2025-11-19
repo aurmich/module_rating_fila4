@@ -4,28 +4,33 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models\Traits;
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Modules\Rating\Models\Rating;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
-use Modules\Rating\Models\Rating;
-use ReflectionException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-// ------ traits ---
 
 /**
- * Trait RatingTrait.
+ * Trait HasRatingsTrait.
  */
-trait RatingTrait
+trait HasRatingsTrait
 {
     /**
      * @return MorphToMany
      */
     public function ratings()
     {
-        return $this->morphRelated(Rating::class);
+        //return $this->morphRelated(Rating::class);
+        $rating_class = Str::of(static::class)
+        ->before('\Models\\')
+        ->append('\Models\Rating')
+        ->toString();
+        return $this->morphToManyX($rating_class,'model');
     }
 
     /**
@@ -80,7 +85,8 @@ trait RatingTrait
     // ----- mutators -----
     // *
     /**
-     * @param  float  $value
+     * @param float $value
+     *
      * @return Collection
      */
     public function getMyRatingAttribute($value)
@@ -95,11 +101,11 @@ trait RatingTrait
      */
     public function getRatingsAvgAttribute(?float $value): ?float
     {
-        if ($value !== null) {
+        if (null !== $value) {
             return $value;
         }
         $value = $this->ratings->avg('pivot.rating');
-        if ($value !== null) {
+        if (null !== $value) {
             // ✅ Persist con update chirurgico (salva SOLO questo campo, previene loop)
             if (null !== $this->getKey()) {
                 $this->update(['ratings_avg' => $value]);
@@ -111,19 +117,19 @@ trait RatingTrait
 
     public function getRatingsCountAttribute(?int $value): ?int
     {
-        if ($value !== null) {
+        if (null !== $value) {
             return $value;
         }
         // Method Illuminate\Support\Collection<int,Modules\Rating\Models\Rating>::count() invoked with 1 parameter, 0 required.
         // $value = $this->ratings->count('pivot.rating');
         $value = $this->ratings->count(); // ?? forse fare filtro
         $this->ratings_count = $value;
-        
+
         // Guard: modello deve avere PK per salvare
         if (null == $this->getKey()) {
             return $value;
         }
-        
+
         // ✅ Persist con update chirurgico (salva SOLO questo campo, previene loop)
         $this->update(['ratings_count' => $value]);
 
@@ -139,7 +145,7 @@ trait RatingTrait
     // ------ functions ------
     /**
      * @throws FileNotFoundException
-     * @throws ReflectionException
+     * @throws \ReflectionException
      */
     public function ratingAvgHtml(): string
     {
@@ -173,4 +179,36 @@ trait RatingTrait
 
         return $msg.$btn.$btn_iframe;
     }
+
+
+
+    /*
+    public function getRatingsRules(string $prefix, string $postfix): array
+    {
+        $rows = Rating::withExtraAttributes()->get();
+        $rules = $rows->pluck('rule.value', 'id')->toArray();
+        $rules = Arr::prependKeysWith($rules, $prefix);
+        $res = [];
+        foreach ($rules as $k => $v) {
+            // $k1=$k.'.pivot.value';
+            $k1 = $k.$postfix;
+            $res[$k1] = (string) $v;
+        }
+
+        // $rules= Arr::appendKeysWith($rules,'.value');
+        return $res;
+    }
+
+    public function getRatingsValidationAttributes(string $prefix, string $postfix): array
+    {
+        $rows = Rating::withExtraAttributes()->get();
+        $res = [];
+        foreach ($rows as $row) {
+            $k1 = $prefix.$row->id.$postfix;
+            $res[$k1] = $row->title;
+        }
+
+        return $res;
+    }
+      */  
 }

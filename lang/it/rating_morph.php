@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'pages' => 'Pagine',
     'widgets' => 'Widget',
@@ -102,6 +104,10 @@ return [
                 'success' => 'Elemento creato con successo',
                 'error' => 'Errore durante la creazione',
             ],
+        ],
+        'logout' => [
+            'tooltip' => 'logout',
+            'icon' => 'logout',
         ],
     ],
 ];

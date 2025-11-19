@@ -91,12 +91,12 @@ return [
         'view' => [
             'label' => 'view',
         ],
-<<<<<<< HEAD
-=======
         'anno' => [
             'label' => 'anno',
         ],
->>>>>>> b888f57 (.)
+        'type' => [
+            'label' => 'type',
+        ],
     ],
     'actions' => [
         'enable' => [
@@ -174,15 +174,12 @@ return [
         'delete' => [
             'tooltip' => 'delete',
             'icon' => 'delete',
-<<<<<<< HEAD
-=======
             'label' => 'delete',
         ],
         'edit' => [
             'tooltip' => 'edit',
             'icon' => 'edit',
             'label' => 'edit',
->>>>>>> b888f57 (.)
         ],
     ],
     'widgets' => [
