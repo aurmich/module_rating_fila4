@@ -4,45 +4,48 @@ declare(strict_types=1);
 
 namespace Modules\Rating\Models\Traits;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Modules\Rating\Models\Rating;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Modules\Rating\Models\Rating;
+use ReflectionException;
 
 /**
  * Trait HasRatingsTrait.
+ *
+ * @property string|null $title
  */
 trait HasRatingsTrait
 {
     /**
-     * @return MorphToMany
+     * Get ratings relationship.
+     *
+     * @return MorphToMany<Rating, $this, \Illuminate\Database\Eloquent\Relations\MorphPivot>
      */
-    public function ratings()
+    public function ratings(): MorphToMany
     {
-        //return $this->morphRelated(Rating::class);
-        $rating_class = Str::of(static::class)
-        ->before('\Models\\')
-        ->append('\Models\Rating')
-        ->toString();
-        return $this->morphToManyX($rating_class,'model');
+        return $this->morphToManyX(Rating::class, 'model');
     }
 
     /**
-     * @return HasMany
+     * Get rating objectives relationship.
+     *
+     * @return HasMany<Rating, $this>
      */
-    public function ratingObjectives()
+    public function ratingObjectives(): HasMany
     {
         $related = Rating::class;
-        $user_id = Auth::id();
+        $user_id_raw = Auth::id();
+        $user_id = is_int($user_id_raw) ? $user_id_raw : (int) ($user_id_raw ?? 0);
+        $modelId = $this->getKey();
 
         return $this->hasMany($related, 'related_type', 'post_type')
-
             ->selectRaw(
                 'ratings.*,
                 count(value) as rating_count,
@@ -51,13 +54,15 @@ trait HasRatingsTrait
                 '
             )->leftJoin(
                 'rating_morph',
-                function ($join): void {
-                    $join->on('rating_morph.rating_id', 'ratings.id')
-                        ->whereRaw('rating_morph.post_type = ratings.related_type')
-                        ->where('rating_morph.post_id', $this->id);
+                function (JoinClause $join) use ($modelId): void {
+                    $join->on('rating_morph.rating_id', '=', 'ratings.id')
+                        ->whereRaw('rating_morph.post_type = ratings.related_type');
+                    if ($modelId !== null) {
+                        $join->where('rating_morph.post_id', '=', $modelId);
+                    }
                 }
             )->groupBy('ratings.id')
-            ->with('post');
+            ->with('linkedTo');
     }
 
     /**
@@ -67,27 +72,33 @@ trait HasRatingsTrait
     {
         return $query->leftJoin(
             'rating_morph',
-            function ($join): void {
-                $join->on('rating_morph.post_type = ratings.related_type');
+            function (JoinClause $join): void {
+                $join->on('rating_morph.post_type', '=', 'ratings.related_type');
             }
         );
     }
 
     /**
-     * @return MorphToMany
+     * Get my ratings relationship (filtered by current user).
+     *
+     * @return MorphToMany<Rating, $this, \Illuminate\Database\Eloquent\Relations\MorphPivot>
      */
-    public function myRatings()
+    public function myRatings(): MorphToMany
     {
-        return $this->morphRelated(Rating::class)
-            ->wherePivot('user_id', Auth::id());
+        $user_id_raw = Auth::id();
+        $user_id = is_int($user_id_raw) ? $user_id_raw : (int) ($user_id_raw ?? 0);
+        return $this->ratings()
+            ->wherePivot('user_id', $user_id);
     }
 
     // ----- mutators -----
     // *
     /**
-     * @param float $value
+     * Get my rating attribute.
      *
-     * @return Collection
+     * @param mixed $value
+     *
+     * @return Collection<int|string, mixed>
      */
     public function getMyRatingAttribute($value)
     {
@@ -167,7 +178,11 @@ trait HasRatingsTrait
         return $msg.'<a data-href="'.$rating_url.'" class="btn btn-danger" data-toggle="modal" data-target="#myModalAjax" data-title="Rate it">
         Rate It </a>';
         */
-        $title = 'Vota '.$this->title;
+
+        /** @var mixed $rawTitle */
+        $rawTitle = $this->title ?? null;
+        $titleValue = is_string($rawTitle) ? $rawTitle : (string) ($rawTitle ?? '');
+        $title = 'Vota '.$titleValue;
 
         $btn = '<button type="button" class="btn btn-red btn-danger" data-toggle="modal" data-target="#vueModal" data-title="'.$title.'" data-href="'.$rating_url.'">
         <span class="font-white"><i class="fa fa-star"></i> Vota ! </span>
@@ -210,5 +225,5 @@ trait HasRatingsTrait
 
         return $res;
     }
-      */  
+      */
 }
